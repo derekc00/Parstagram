@@ -23,7 +23,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func finishEditing(_ sender: Any) {
+        self.view.endEditing(true)
+    }
+    
     //What happens when the user taps the image placeholder
     //Make sure 'UserInteractionEnabled' is selected for tap gestures
     @IBAction func PostButton(_ sender: Any) {
@@ -57,6 +60,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         picker.allowsEditing = true
         
         if UIImagePickerController.isSourceTypeAvailable(.camera){
+            print("ABAB")
             picker.sourceType = .camera
         }else{
             picker.sourceType = .photoLibrary
