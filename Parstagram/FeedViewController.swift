@@ -42,9 +42,11 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc func keyboardWillBeHidden(note: Notification){
         
-        commentBar.inputTextView.text = nil
         showsCommentBar = false
         becomeFirstResponder()
+        commentBar.inputTextView.text = nil
+        
+        
     }
     
     //Used for MessageInputBar
@@ -163,7 +165,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let post = posts[indexPath.section]
         let comments = (post["Comments"] as? [PFObject]) ?? []
         
-        if indexPath.row == 0
+        if indexPath.row == 0{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileInfo") as! ProfileInfoTableViewCell
+            let user = post["author"] as! PFUser
+            
+            cell.nameLabel.text = user.username
+            return cell
+        }
+        else if indexPath.row == 1
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostCell
             
